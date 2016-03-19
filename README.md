@@ -1,7 +1,3 @@
-**IMPORTANT NOTICE**: This project is currently not supported. We accept pull requests, but we're not doing any feature development/bug fixing
-
-
-[![Build Status](https://travis-ci.org/Asquera/elasticsearch-http-basic.svg?branch=master)](https://travis-ci.org/Asquera/elasticsearch-http-basic)
 
 **IMPORTANT NOTICE**: versions 1.0.4 is *insecure and should not be used*.
 They have a bug that allows an attacker to get ip authentication by setting
@@ -21,7 +17,8 @@ There is no way to configure this on a per index basis.
 
 |     Http Basic Plugin       | elasticsearch                |
 |-----------------------------|------------------------------|
-| v1.5.1(master)              | 1.5.1, 1.5.2, 1.6.0, 1.7.0   |
+| v2.2.0(master)              | 2.2.0                        |
+| v1.5.1                      | 1.5.1, 1.5.2, 1.6.0, 1.7.0   |
 | v1.5.0                      | 1.5.0                        |
 | v1.4.0                      | 1.4.0                        |
 | v1.3.0                      | 1.3.0                        |
@@ -30,6 +27,8 @@ There is no way to configure this on a per index basis.
 | 1.0.4                       | 0.90.7                       |
 
 ## Installation
+
+for version 2.2.0, you can just sh bin/plugin install luckworld/elasticsearch-http-basic to install it
 
 Download the desired version from https://github.com/Asquera/elasticsearch-http-basic/releases and copy it to `plugins/http-basic`.
 

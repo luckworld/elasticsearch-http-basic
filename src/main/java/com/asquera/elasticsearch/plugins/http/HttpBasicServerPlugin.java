@@ -1,45 +1,51 @@
 package com.asquera.elasticsearch.plugins.http;
 
+import org.elasticsearch.common.component.LifecycleComponent;
 import org.elasticsearch.common.inject.Inject;
 import org.elasticsearch.common.inject.Module;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.plugins.AbstractPlugin;
-import org.elasticsearch.common.component.LifecycleComponent;
-import org.elasticsearch.common.settings.ImmutableSettings;
+import org.elasticsearch.plugins.Plugin;
 
 import java.util.Collection;
+import java.util.Collections;
 
-import static org.elasticsearch.common.collect.Lists.*;
+import static com.google.common.collect.Lists.newArrayList;
 
 /**
  * @author Florian Gilcher (florian.gilcher@asquera.de)
  */
-public class HttpBasicServerPlugin extends AbstractPlugin {
+public class HttpBasicServerPlugin extends Plugin {
 
     private boolean enabledByDefault = true;
     private final Settings settings;
 
-    @Inject public HttpBasicServerPlugin(Settings settings) {
+    @Inject
+    public HttpBasicServerPlugin(Settings settings) {
         this.settings = settings;
     }
 
-    @Override public String name() {
+    @Override
+    public String name() {
         return "http-basic-server-plugin";
     }
 
-    @Override public String description() {
+    @Override
+    public String description() {
         return "HTTP Basic Server Plugin";
     }
 
-    @Override public Collection<Class<? extends Module>> modules() {
+    @Override
+    public Collection<Module> nodeModules() {
         Collection<Class<? extends Module>> modules = newArrayList();
         if (settings.getAsBoolean("http.basic.enabled", enabledByDefault)) {
             modules.add(HttpBasicServerModule.class);
         }
-        return modules;
+
+        return Collections.<Module>singletonList(new HttpBasicServerModule(settings));
     }
 
-    @Override public Collection<Class<? extends LifecycleComponent>> services() {
+    @Override
+    public Collection<Class<? extends LifecycleComponent>> nodeServices() {
         Collection<Class<? extends LifecycleComponent>> services = newArrayList();
         if (settings.getAsBoolean("http.basic.enabled", enabledByDefault)) {
             services.add(HttpBasicServer.class);
@@ -49,11 +55,11 @@ public class HttpBasicServerPlugin extends AbstractPlugin {
 
     @Override public Settings additionalSettings() {
         if (settings.getAsBoolean("http.basic.enabled", enabledByDefault)) {
-            return ImmutableSettings.settingsBuilder().
+            return Settings.settingsBuilder().
                     put("http.enabled", false).                    
                     build();
         } else {
-            return ImmutableSettings.Builder.EMPTY_SETTINGS;
+            return Settings.Builder.EMPTY_SETTINGS;
         }
     }
 }
