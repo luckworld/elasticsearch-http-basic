@@ -53,7 +53,8 @@ public class HttpBasicServerPlugin extends Plugin {
         return services;
     }
 
-    @Override public Settings additionalSettings() {
+    @Override
+    public Settings additionalSettings() {
         if (settings.getAsBoolean("http.basic.enabled", enabledByDefault)) {
             return Settings.settingsBuilder().
                     put("http.enabled", false).                    
