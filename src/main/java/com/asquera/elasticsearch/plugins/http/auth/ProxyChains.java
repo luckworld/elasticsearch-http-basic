@@ -54,7 +54,6 @@ public class ProxyChains {
    * a comparator that uses ip chain size
    */
   class InetAddressChainComparator implements Comparator<ProxyChain> {
-    @Override
     public int compare(ProxyChain a, ProxyChain b) {
       return a.size() < b.size() ? -1 : a.size() == b.size() ? 0 : 1;
     }

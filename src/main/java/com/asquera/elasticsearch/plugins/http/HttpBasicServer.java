@@ -50,7 +50,8 @@ public class HttpBasicServer extends HttpServer {
     private final String xForwardHeader;
     private final boolean log;
 
-    @Inject public HttpBasicServer(Settings settings, Environment environment, HttpServerTransport transport,
+    @Inject
+    public HttpBasicServer(Settings settings, Environment environment, HttpServerTransport transport,
             RestController restController,
             NodeService nodeService) {
         super(settings, environment, transport, restController, nodeService);
